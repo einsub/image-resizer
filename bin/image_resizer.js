@@ -59,7 +59,7 @@ function createApplicationAt(dir){
       'node': pkg.engines.node
     },
     dependencies: {
-      'image-resizer': '~' + pkg.version,
+      'image-resizer': 'git+https://git@github.com/einsub/image-resizer.git',
       'express': pkg.dependencies.express,
       'lodash': pkg.dependencies.lodash,
       'chalk': pkg.dependencies.chalk,
