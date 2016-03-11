@@ -20,9 +20,14 @@ module.exports = function () {
       return callback(null, image);
     }
 
+    if (image.modifiers.action === 'original'){
+      image.log.log('optimize: original no optimize');
+      return callback(null, image);
+    }
+
     image.log.time('optimize-sharp:' + image.format);
 
-    var r = sharp(image.contents);
+    var r = sharp(image.contents).flatten().jpeg();
 
     if (env.IMAGE_PROGRESSIVE) {
       r.progressive();
