@@ -162,6 +162,10 @@ function parseModifiers(mods, modArr) {
   var key, value, mod;
 
   _.each(modArr, function(item){
+    if (!/[hwsyxq]\d+|c(?=fit|fill|cut|scale|pad)|g(?=s|ne)|f(?=sepia)|e(?=facebook)/.test(item)){
+      return;
+    }
+    
     key = item[0];
     value = item.slice(1);
 
