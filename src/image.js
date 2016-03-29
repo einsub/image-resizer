@@ -36,7 +36,8 @@ function Image(request){
   this.parseImage(request);
 
   // determine the requested modifications
-  this.modifiers = modifiers.parse(request.path);
+  //this.modifiers = modifiers.parse(request.path);
+  this.modifiers = modifiers.parse(request.path, request.query);
 
   // pull the various parts needed from the request params
   this.parseUrl(request);
@@ -97,7 +98,7 @@ Image.prototype.parseUrl = function(request){
 
   // if there is a modifier string remove it
   if (this.modifiers.hasModStr) {
-    parts.shift();
+    //parts.shift();
   }
 
   this.path = parts.join('/');

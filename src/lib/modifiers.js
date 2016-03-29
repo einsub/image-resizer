@@ -165,7 +165,7 @@ function parseModifiers(mods, modArr) {
     if (!/[hwsyxq]\d+|c(?=fit|fill|cut|scale|pad)|g(?=s|ne)|f(?=sepia)|e(?=facebook)/.test(item)){
       return;
     }
-    
+
     key = item[0];
     value = item.slice(1);
 
@@ -291,7 +291,7 @@ var limitMaxDimension = function(mods, env){
 // Exposed method to parse an incoming URL for modifiers, can add a map of
 // named (preset) modifiers if need be (mostly just for unit testing). Named
 // modifiers are usually added via config json file in root of application.
-exports.parse = function(requestUrl, namedMods, envOverride){
+exports.parse = function(requestUrl, requestQuery, namedMods, envOverride){
   // override 'env' for testing
   if(typeof envOverride !== 'undefined'){
     env = _.clone(envOverride);
@@ -305,7 +305,8 @@ exports.parse = function(requestUrl, namedMods, envOverride){
   crop      = getModifier('c');
   quality   = getModifier('q');
   segments  = requestUrl.replace(/^\//,'').split('/');
-  modStr    = _.first(segments);
+  //modStr    = _.first(segments);
+  modStr    = _.chain(requestQuery).map(function(v, k) { return (k+v); }).join('-').value();
   image     = _.last(segments).toLowerCase();
   namedMods = typeof namedMods === 'undefined' ? namedModifierMap : namedMods;
 
