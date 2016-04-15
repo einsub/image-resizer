@@ -72,6 +72,14 @@ Image.prototype.parseImage = function(request){
     fileStr = exts.join('.');
   }
 
+  var fileFormat = exts[exts.length - 1];
+  if (_.indexOf(Image.validInputFormats, fileFormat) === -1) {
+    this.isImage = false;
+    this.format = fileFormat;
+  } else {
+    this.isImage = true;
+  }
+
   // if path contains valid output format, remove it from path
   if (exts.length >= 3) {
     var inputFormat = exts[exts.length - 2];
@@ -192,8 +200,12 @@ Object.defineProperty(Image.prototype, 'contents', {
     this._contents = data;
 
     if (this.isBuffer()) {
-      this.format = imgType(data).ext;
-      this.isFormatValid();
+      var it = imgType(data);
+      if (it) {
+        this.format = it.ext;
+      }
+      //this.format = imgType(data).ext;
+      //this.isFormatValid();
     }
   }
 });

@@ -68,12 +68,18 @@ Return an image modified to the requested parameters
 app.get('/*?', function(request, response){
   var image = new Img(request);
 
-  image.getFile()
-    .pipe(new streams.identify())
-    .pipe(new streams.resize())
-    .pipe(new streams.filter())
-    .pipe(new streams.optimize())
-    .pipe(streams.response(request, response));
+  if (image.isImage) {
+    image.getFile()
+      .pipe(new streams.identify())
+      .pipe(new streams.resize())
+      .pipe(new streams.filter())
+      .pipe(new streams.optimize())
+      .pipe(streams.response(request, response));
+  } else {
+    image.getFile()
+      .pipe(streams.response(request, response));
+  }
+
 });
 
 
