@@ -46,7 +46,7 @@ vars = {
   QUEUE_LOG: true,
 
   // Response settings
-  CACHE_DEV_REQUESTS: false,
+  CACHE_DEV_REQUESTS: true,
 
   // Twitter settings
   TWITTER_CONSUMER_KEY: null,
