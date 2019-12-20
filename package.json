@@ -21,9 +21,6 @@
   "bin": {
     "image-resizer": "./bin/image_resizer.js"
   },
-  "engines": {
-    "node": "0.12.x"
-  },
   "dependencies": {
     "aws-sdk": "~2.0.0-rc9",
     "chalk": "~1.0.0",
